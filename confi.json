@@ -1,0 +1,26 @@
+{
+    "parameter": {
+        "local_host":true,
+        "local_url":"mysql+pymysql://root:@localhost/projects",
+        "production_url":"mysql+pymysql://username:password@server/projects",
+        "linked_url":"https://linkedin.com/in/gautam-maurya-63a394241",
+        "git_url":"https://github.com/alpha-Gautam?tab=repositories",
+        "tw_url":"https://twitter.com/gautammaurya",
+        "mail_user":"gautammaurya.mail@gmail.com",
+        "mail_password":"Gautam@12345",
+        "admin_uname":"admin",
+        "admin_password":"admin121",
+        "no_of_post":4
+
+    },
+    "defult_post":{
+        "title":"Default Post",
+        "sub_title":"sub Title is not defiend",
+        "content":"This is a default post",
+        "date":"00-00-00",
+        "name":"unknown",
+        "text":"there is no text fo this post"
+        
+
+    }
+}
