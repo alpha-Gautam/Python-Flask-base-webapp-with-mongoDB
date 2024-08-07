@@ -5,14 +5,11 @@ import json
 
 
 with open("confi.json", "r") as c:
-    # params = json.load(c)["parameter"]
     data=json.load(c)
 params=data["parameter"]
-# posts= data["defult_post"]
 
 app = Flask(__name__)
 
-# myclient=[]
 myclient = pymongo.MongoClient("mongodb+srv://gautammauryamail:R44GrJoMauAjN2yS@cluster0.hk9okct.mongodb.net/")
 db = myclient["mydatabase"]
 
@@ -110,4 +107,4 @@ def dasboard():
     return render_template("dasboard.html",params=params,posts=posts)
 
 
-app.run(debug = True)
+# app.run(debug = True)
