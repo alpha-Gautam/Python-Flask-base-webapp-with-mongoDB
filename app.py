@@ -54,6 +54,7 @@ def login():
         password=request.form.get("p_word")
         if uname==params["admin_uname"] and password==params["admin_password"]:
             session["user"]=uname
+            params["session_user"]=True
             
             posts=post_db.find()
             return render_template("dasboard.html",params=params,posts=posts)
@@ -73,7 +74,8 @@ def login():
 def logout():
     # Remove the "user" key from the session
     session.pop("user", None)
-    return render_template("login.html",params=params)
+    params["session_user"]=False
+    return render_template("home.html",params=params)
 
 
 @app.route("/about")

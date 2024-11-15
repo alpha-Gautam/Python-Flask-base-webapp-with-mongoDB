@@ -70,7 +70,12 @@
               >
             </li>
             <li class="nav-item">
-              <a class="nav-link px-lg-3 py-3 py-lg-4" href="login">Login</a>
+              {% if params['session_user'] %} {% set session_href = "logout" %}
+              {% set session_log = "Logout" %} {% else %} {% set session_href =
+              "login" %} {% set session_log = "Login" %} {% endif %}
+              <a class="nav-link px-lg-3 py-3 py-lg-4" href="{{ session_href }}"
+                >{{ session_log }}</a
+              >
             </li>
           </ul>
         </div>
