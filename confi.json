@@ -5,7 +5,8 @@
         "tw_url":"https://twitter.com/gautammaurya",
         "admin_uname":"admin",
         "admin_password":"admin121",
-        "no_of_post":4
+        "no_of_post":4,
+        "session_user":false
 
     }
 }

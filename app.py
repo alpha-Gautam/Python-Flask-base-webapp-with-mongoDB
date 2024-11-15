@@ -1,7 +1,9 @@
-from flask import Flask, render_template, request
+from flask import Flask, render_template, request, session
 import pymongo
 from datetime import datetime
 import json
+
+
 
 
 with open("confi.json", "r") as c:
@@ -9,6 +11,7 @@ with open("confi.json", "r") as c:
 params=data["parameter"]
 
 app = Flask(__name__)
+app.secret_key = "super-secret-key"
 
 myclient = pymongo.MongoClient("mongodb+srv://gautammauryamail:R44GrJoMauAjN2yS@cluster0.hk9okct.mongodb.net/")
 db = myclient["mydatabase"]
@@ -25,10 +28,10 @@ post_db = db.posts
 
 
 @app.route("/")
-@app.route("/index")
-def index_html():
+@app.route("/home")
+def home_html():
     posts=post_db.find()[:params["no_of_post"]]
-    return render_template("index.html", params=params,posts=posts)
+    return render_template("home.html", params=params,posts=posts)
 
 
 @app.route("/post/<string:post_slug>", methods=["GET"])
@@ -40,19 +43,19 @@ def post_route(post_slug):
 
 
 
-
-
-
-
-
-
-
 @app.route("/login", methods=["GET","POST"])
 def login():
-    if request.method == "POST":
+    if("user" in session and session["user"]==params["admin_uname"]):
+        posts=post_db.find()
+        return render_template("dasboard.html",params=params,posts=posts)
+        
+    elif request.method == "POST":
         uname= request.form.get("uname")
         password=request.form.get("p_word")
         if uname==params["admin_uname"] and password==params["admin_password"]:
+            session["user"]=uname
+            params["session_user"]=True
+            
             posts=post_db.find()
             return render_template("dasboard.html",params=params,posts=posts)
         elif uname!=params["admin_uname"] or password!=params["admin_password"]:
@@ -65,6 +68,14 @@ def login():
 
     else:
         return render_template("login.html", params=params)
+
+
+@app.route("/logout")
+def logout():
+    # Remove the "user" key from the session
+    session.pop("user", None)
+    params["session_user"]=False
+    return render_template("home.html",params=params)
 
 
 @app.route("/about")
