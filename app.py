@@ -75,7 +75,8 @@ def logout():
     # Remove the "user" key from the session
     session.pop("user", None)
     params["session_user"]=False
-    return render_template("home.html",params=params)
+    # return render_template("home.html",params=params)
+    return home_html()
 
 
 @app.route("/about")
@@ -84,11 +85,10 @@ def about():
 
 
 
-# @app.route("/post")
-# @app.route("/post/<string:post_slug>",methods=['GET'])
-# def post_route(post_slug):
-#     post = Posts.query.filter_by(slug=post_slug).first()
-#     return render_template("post.html", params=params, post=post )
+@app.route("/post")
+def post_route():
+    post = Posts.query.filter_by(slug=post_slug).first()
+    return render_template("post.html", params=params, post=post )
 
 
 @app.route("/contact", methods=['GET', 'POST'])
