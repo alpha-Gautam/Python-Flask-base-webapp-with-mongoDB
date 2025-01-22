@@ -35,7 +35,7 @@ def home_html():
 
 
 @app.route("/post/<string:post_slug>", methods=["GET"])
-def post_route(post_slug):
+def post_detail(post_slug):
     # slug=post_slug
     post=post_db.find_one({"slug":post_slug})
     return render_template("post.html",params=params,post=post)
@@ -87,8 +87,9 @@ def about():
 
 @app.route("/post")
 def post_route():
-    post = Posts.query.filter_by(slug=post_slug).first()
-    return render_template("post.html", params=params, post=post )
+    # post = Posts.query.filter_by(slug=post_slug).first()
+    # return render_template("post.html", params=params, post=post )
+    pass
 
 
 @app.route("/contact", methods=['GET', 'POST'])
@@ -119,4 +120,4 @@ def dasboard():
     return render_template("dasboard.html",params=params,posts=posts)
 
 
-# app.run(debug = True)
+app.run(debug = True)
