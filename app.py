@@ -38,7 +38,7 @@ def home_html():
 def post_detail(post_slug):
     # slug=post_slug
     post=post_db.find_one({"slug":post_slug})
-    return render_template("post.html",params=params,post=post)
+    return render_template("postdetail.html",params=params,post=post)
 
 
 
@@ -70,15 +70,6 @@ def login():
         return render_template("login.html", params=params)
 
 
-@app.route("/logout")
-def logout():
-    # Remove the "user" key from the session
-    session.pop("user", None)
-    params["session_user"]=False
-    # return render_template("home.html",params=params)
-    return home_html()
-
-
 @app.route("/about")
 def about():
     return render_template("about.html",params=params)
@@ -87,9 +78,9 @@ def about():
 
 @app.route("/post")
 def post_route():
-    # post = Posts.query.filter_by(slug=post_slug).first()
-    # return render_template("post.html", params=params, post=post )
-    pass
+    posts=post_db.find()[:params["no_of_post"]]
+    return render_template("post.html", params=params,posts=posts)
+    
 
 
 @app.route("/contact", methods=['GET', 'POST'])
@@ -118,6 +109,19 @@ def contact():
 def dasboard():
     posts=post_db.find()
     return render_template("dasboard.html",params=params,posts=posts)
+
+
+
+
+@app.route("/logout")
+def logout():
+    # Remove the "user" key from the session
+    session.pop("user", None)
+    params["session_user"]=False
+    # return render_template("home.html",params=params)
+    return home_html()
+
+
 
 
 app.run(debug = True)
