@@ -3,7 +3,6 @@
   <head>
     <meta charset="UTF-8" />
     <title>Classic Login Form Example</title>
-    <!--  <link href="https://fonts.googleapis.com/css?family=Assistant:400,700" rel="stylesheet"><link rel="stylesheet" href="./style.css">  -->
     <link
       href="https://fonts.googleapis.com/css?family=Assistant:400,700"
       rel="stylesheet"
@@ -18,7 +17,13 @@
     <div>
       <a href="home">Back</a>
     </div>
+    <div class="login_panal">
+      <div class="home-link">
+        <a href="home"> Back</a>
+      </div>
     <section class="login" id="login">
+
+     
       <div class="head">
         <h1 class="company">Admin Login</h1>
       </div>
@@ -40,22 +45,14 @@
             name="p_word"
           /><br />
           <p style="color: tomato">{{mess}}</p>
+          <div class="login_forget">
           <button class="btn-login" type="submit">Login</button>
-          <!--   <button class="forgot" type="submit">Forgot</button>
-            <button  class="btn btn-lg btn-primary btn-block"type="submit">  LOGIN  </button>
-  <a href="#" class='btn-login' id='do-login'>Login</a>  -->
-          <a href="#" class="forgot">Forgot?</a>
-        </form>
+          <button class="btn-login" type="Forget">Forget</button>
+          </div>
+
       </div>
-    </section>
-    <!--
-<footer>
-  <p>Made with <span class='heart'>&hearts;</span> by Bridges(<a href='https://github.com/pxntxs'>@pxntxs</a>)</p>
-  <p>Gradient: <a href='https://uigradients.com/#Turquoiseflow'>https://uigradients.com/#Turquoiseflow</a></p>
-</footer>  
--->
-    <!-- partial 
-  <script  src="{{url_for('static',filename='js/script.js')}}"></script>
--->
+  
+    </div>
   </body>
+  
 </html>
