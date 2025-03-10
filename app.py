@@ -30,7 +30,11 @@ post_db = db.posts
 @app.route("/")
 @app.route("/home")
 def home_html():
+    start=datetime.now()
     posts=post_db.find()[:params["no_of_post"]]
+    print("time different:-",datetime.now()-start)
+    print("time start:-",start)
+    print("time later:-",datetime.now())
     return render_template("home.html", params=params,posts=posts)
 
 
