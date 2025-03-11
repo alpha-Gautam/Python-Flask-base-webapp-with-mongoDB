@@ -1,4 +1,4 @@
-from flask import Flask, render_template, request, session
+from flask import Flask, render_template, request, session, jsonify
 import pymongo
 from datetime import datetime
 import json
@@ -35,6 +35,8 @@ def home_html():
     print("time different:-",datetime.now()-start)
     print("time start:-",start)
     print("time later:-",datetime.now())
+    print("server url:-", request.url)
+    
     return render_template("home.html", params=params,posts=posts)
 
 
@@ -124,6 +126,39 @@ def logout():
     params["session_user"]=False
     # return render_template("home.html",params=params)
     return home_html()
+
+
+@app.route("/api", methods=["GET"])
+def api():
+    filter={"_id":0, "s_no":1,"title":1,"name":1,"slug":1,"content":1,"date":1, "tagline":1}
+    posts = post_db.find({},filter)
+    
+    post_data = [post for post in posts]
+    print("post data...", len(post_data))
+    print("post data...", type(post_data))
+    return jsonify(post_data)
+
+
+
+@app.route("/add_post", methods=["POST"])
+def add_post():
+    if request.method == "POST":
+        #  entry message to database
+        '''first (name) is to store data ,second ("name") is comes from web page'''
+        post_data={
+            "name": request.form.get("name"),
+            "phone" : request.form.get("phone"),
+            "email" : request.form.get("email"),
+            "message" : request.form.get("message"),
+            "time" : datetime.now()
+            }
+        response = post_db.insert_one(post_data)
+        return "response"
+       
+    
+    
+    
+    
 
 
 
