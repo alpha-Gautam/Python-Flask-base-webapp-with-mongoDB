@@ -4,6 +4,10 @@
 <header
   class="masthead"
   style="background-image: url('{{url_for('static',filename='assets/img/admin1-bg.jpg')}}')"
+  <link
+  rel="stylesheet"
+  href="{{url_for('static', filename='css/dasboard.css')}}"
+/>
 >
   <div class="container position-relative px-4 px-lg-5">
     <div class="row gx-4 gx-lg-5 justify-content-center">
@@ -21,7 +25,11 @@
   <h2 align="center">HTML Table</h2>
   <hr />
   <p></p>
+  <div style="display: flex; height:50px; justify-content: flex-end; padding-right: 50px; background-color: black;">
+    <button onclick="console.log('add button clocked..!')"  class="button " style="flex ; border-radius: 20px; " >Add Blog</button>
 
+  </div>
+  </div>
   <div style="overflow: auto">
     <table style="width: 100%">
       <tr style="background-color: #eee; text-align: center">
