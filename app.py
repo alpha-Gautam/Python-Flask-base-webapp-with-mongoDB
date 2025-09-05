@@ -14,10 +14,9 @@ scheduler = BackgroundScheduler()
 
 
 def myfunc():
-    # res=requests.get("http://127.0.0.1:5000/hello")
     requests.get("https://flask-web-xlni.onrender.com/hello")
     print("scheduler is running....")
-    # print(res.json())
+    
     return "ok"
 job = scheduler.add_job(myfunc, 'interval', minutes=2)
 scheduler.start()
@@ -76,9 +75,11 @@ def save_user_to_db(user_info):
 
 @app.route("/hello")
 def hello():
-    # print("hello")
-    
-    return f"Hi, I am doing good, now the time is:- {datetime.now()}"
+    response = requests.get("http://ip-api.com/json/")
+    location_data = response.json()
+    return f"Hi, I am doing good, now the time is:- {datetime.now()}\n\n and location data: {location_data}"
+
+
 @app.route("/")
 @app.route("/home")
 def home_html():
