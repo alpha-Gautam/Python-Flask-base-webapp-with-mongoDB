@@ -1,0 +1,9 @@
+{
+    "parameter": {
+        "linked_url":"https://linkedin.com/in/your-profile",
+        "git_url":"https://github.com/your-username?tab=repositories",
+        "tw_url":"https://twitter.com/your-username",
+        "no_of_post":4,
+        "session_user":false
+    }
+}

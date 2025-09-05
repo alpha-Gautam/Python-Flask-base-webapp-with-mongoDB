@@ -22,28 +22,33 @@
     <div class="col-md-10 col-lg-8 col-xl-7">
       <!-- Post preview-->
 
-      {% for post in posts %}
-      <div class="post-preview">
-        <a href="/post/{{post.slug}}">
-          <h2 class="post-title">{{post.title}}</h2>
-          <h3 class="post-subtitle">{{post.tagline}}</h3>
-        </a>
-        <p class="post-meta">
-          Posted by
-          <a href="#!">{{post.name}}</a>
-          on {{post.date}}
-        </p>
-        <p>{{post.content[:20]}}....</p>
-        <hr />
-      </div>
-      {% endfor %}
+      <!-- Projects Section -->
+      <section class="projects-section mb-5">
+        <h2 class="mb-4">About the Projects</h2>
+        <div class="card mb-3">
+          <div class="card-body">
+            <h4 class="card-title">Python Flask Base Webapp with MongoDB</h4>
+            <p class="card-text">
+              This project is a starter template for building web applications
+              using Flask and MongoDB. It features user authentication, blog
+              posting, and a modern UI. The codebase is organized for easy
+              extension and deployment.
+            </p>
+            <ul>
+              <li>Flask backend with Jinja2 templating</li>
+              <li>MongoDB for data storage</li>
+              <li>Responsive design with Bootstrap</li>
+              <li>Ready for deployment on Vercel</li>
+            </ul>
+          </div>
+        </div>
+        <!-- Add more projects here as needed -->
+      </section>
 
       <!-- Divider-->
       <!-- <hr class="my-4" /> -->
       <!-- Pager-->
-      <div class="d-flex justify-content-end mb-4">
-        <a class="btn btn-primary text-uppercase" href="#!">Older Posts →</a>
-      </div>
+      <div class="d-flex justify-content-end mb-4"></div>
     </div>
   </div>
 </div>

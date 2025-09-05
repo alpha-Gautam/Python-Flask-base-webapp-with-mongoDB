@@ -1,34 +1,46 @@
 {% extends "layout.html" %} {% block body %}
 
+<!-- Firebase Scripts for logout functionality -->
+<script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-auth-compat.js"></script>
+
 <!-- Page Header-->
 <header
   class="masthead"
   style="background-image: url('{{url_for('static',filename='assets/img/admin1-bg.jpg')}}')"
-  <link
-  rel="stylesheet"
-  href="{{url_for('static', filename='css/dasboard.css')}}"
-/>
 >
+  <link rel="stylesheet" href="{{url_for('static', filename='css/dasboard.css')}}" />
   <div class="container position-relative px-4 px-lg-5">
     <div class="row gx-4 gx-lg-5 justify-content-center">
       <div class="col-md-10 col-lg-8 col-xl-7">
         <div class="post-heading">
-          <!-- <h1>Man must explore, and this is exploration at its greatest</h1> -->
-          <h1 align="center">Welcome To Admin palne</h1>
+          <h1 align="center">Welcome To Admin Panel</h1>
+          {% if session.display_name %}
+            <p align="center" style="color: white;">Welcome, {{ session.display_name }}!</p>
+          {% elif session.user %}
+            <p align="center" style="color: white;">Welcome, {{ session.user }}!</p>
+          {% endif %}
         </div>
       </div>
     </div>
   </div>
 </header>
+
+<!-- Admin Controls -->
+<div style="display: flex; justify-content: space-between; align-items: center; padding: 20px 50px; background-color: #f8f9fa; border-bottom: 1px solid #ddd;">
+  <div>
+    <h5 style="margin: 0;">Dashboard Controls</h5>
+  </div>
+  <div style="display: flex; gap: 15px;">
+    <button onclick="addBlog()" class="btn btn-primary" style="border-radius: 20px;">Add Blog</button>
+    <button onclick="handleLogout()" class="btn btn-danger" style="border-radius: 20px;">Logout</button>
+  </div>
+</div>
 <!-- Post Content-->
 <body>
-  <h2 align="center">HTML Table</h2>
+  <h2 align="center">Blog Posts Management</h2>
   <hr />
   <p></p>
-  <div style="display: flex; height:50px; justify-content: flex-end; padding-right: 50px; background-color: black;">
-    <button onclick="console.log('add button clocked..!')"  class="button " style="flex ; border-radius: 20px; " >Add Blog</button>
-
-  </div>
   </div>
   <div style="overflow: auto">
     <table style="width: 100%">
@@ -62,17 +74,61 @@
       <div class="row gx-4 gx-lg-5 justify-content-center">
         <div class="col-md-10 col-lg-8 col-xl-7">
           <p>
-            Placeholder text by
-            <a href="http://spaceipsum.com/">Space Ipsum</a>
-            &middot; Images by
-            <a href="https://www.flickr.com/photos/nasacommons/"
-              >NASA on The Commons</a
-            >
+            Admin Dashboard - Manage your blog posts and content
           </p>
         </div>
       </div>
     </div>
   </article>
+
+<script>
+  // Firebase configuration - Replace with your actual config
+  const firebaseConfig = {
+      apiKey: "your-api-key",
+      authDomain: "your-project-id.firebaseapp.com",
+      databaseURL: "https://your-project-id-default-rtdb.firebaseio.com",
+      projectId: "your-project-id",
+      storageBucket: "your-project-id.appspot.com",
+      messagingSenderId: "your-sender-id",
+      appId: "your-app-id"
+  };
+
+  // Initialize Firebase
+  firebase.initializeApp(firebaseConfig);
+  const auth = firebase.auth();
+
+  function addBlog() {
+      alert('Add blog functionality coming soon!');
+      // You can implement blog creation functionality here
+  }
+
+  function handleLogout() {
+      // Sign out from Firebase if user is logged in via Firebase
+      auth.signOut().then(() => {
+          console.log('Firebase signout successful');
+      }).catch((error) => {
+          console.log('Firebase signout error (user might not be logged in via Firebase):', error);
+      }).finally(() => {
+          // Always redirect to logout route to clear server session
+          window.location.href = '/logout';
+      });
+  }
+
+  // Check authentication status on page load
+  document.addEventListener('DOMContentLoaded', function() {
+      fetch('/api/auth-status')
+          .then(response => response.json())
+          .then(data => {
+              if (!data.authenticated) {
+                  // If not authenticated on server, redirect to login
+                  window.location.href = '/login';
+              }
+          })
+          .catch(error => {
+              console.error('Error checking auth status:', error);
+          });
+  });
+</script>
 </body>
 <!-- Footer-->
 {% endblock %}
