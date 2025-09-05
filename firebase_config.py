@@ -21,7 +21,7 @@ firebase_config = {
 # Initialize Firebase Admin SDK
 try:
     if not firebase_admin._apps:
-        service_key_path = 'serviceAccountKey.json'
+        service_key_path = '/etc/secrets/serviceAccountKey.json'
         if os.path.exists(service_key_path):
             cred = credentials.Certificate(service_key_path)
             firebase_admin.initialize_app(cred)
