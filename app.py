@@ -3,9 +3,24 @@ import pymongo
 from datetime import datetime
 import json
 import os
+import requests
 from dotenv import load_dotenv
 from firebase_config import verify_firebase_token, get_user_info
 from functools import wraps
+from apscheduler.schedulers.background import BackgroundScheduler
+
+
+scheduler = BackgroundScheduler()
+
+
+def myfunc():
+    # res=requests.get("http://127.0.0.1:5000/hello")
+    requests.get("https://flask-web-xlni.onrender.com/hello")
+    print("scheduler is running....")
+    # print(res.json())
+    return "ok"
+job = scheduler.add_job(myfunc, 'interval', minutes=2)
+scheduler.start()
 
 # Load environment variables from .env file
 load_dotenv()
@@ -58,6 +73,12 @@ def save_user_to_db(user_info):
     )
     return user_data
 
+
+@app.route("/hello")
+def hello():
+    # print("hello")
+    
+    return f"Hi, I am doing good, now the time is:- {datetime.now()}"
 @app.route("/")
 @app.route("/home")
 def home_html():
