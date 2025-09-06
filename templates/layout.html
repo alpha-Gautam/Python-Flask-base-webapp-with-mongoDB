@@ -75,13 +75,26 @@
                 >Admin Panale</a
               >
             </li>
+
             {% endif %}
             <li class="nav-item">
               {% if params['session_user'] %} {% set session_href = "logout" %}
               {% set session_log = "Logout" %} {% else %} {% set session_href =
               "login" %} {% set session_log = "Login" %} {% endif %}
-              <a class="nav-link px-lg-3 py-3 py-lg-4" href="{{ session_href }}"
-                >{{ session_log }}</a
+              <a
+                class="nav-link px-lg-3 py-3 py-lg-4"
+                href="{{ session_href }}"
+                onclick="return confirm('Do you want to {{ session_log }}?')"
+                >{% if session_log=="Logout" %}<img
+                  src="{{url_for('static', filename='assets/login_icon.png')}}"
+                  alt="User Logo"
+                  style="
+                    width: 32px;
+                    height: 32px;
+                    margin-top: -7px;
+                    border-radius: 50%;
+                  "
+                />{% else %}Login{% endif %}</a
               >
             </li>
           </ul>
