@@ -14,10 +14,16 @@ scheduler = BackgroundScheduler()
 
 
 def myfunc():
-    requests.get("https://flask-web-xlni.onrender.com/hello")
-    print("scheduler is running....")
+    print("\n\nscheduler is running..........................................")
+    res=requests.get("https://flask-web-xlni.onrender.com/hello")
+    print("flask-web response:-",res.text)
     
+    response=requests.get("https://recpapers-backend.onrender.com/")
+    print("recpapers response:-",response.text)
+
+
     return "ok"
+
 job = scheduler.add_job(myfunc, 'interval', minutes=2)
 scheduler.start()
 
