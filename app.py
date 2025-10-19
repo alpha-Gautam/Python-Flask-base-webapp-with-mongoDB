@@ -112,7 +112,7 @@ def post_detail(post_slug):
 def login():
     if("user" in session):
         posts=post_db.find()
-        return render_template("dasboard.html",params=params,posts=posts)
+        return render_template("dashboard.html",params=params,posts=posts)
         
     elif request.method == "POST":
         # Handle Firebase token verification
@@ -137,7 +137,7 @@ def login():
                         session["display_name"] = user_info.get('display_name', user_info['email'])
                         params["session_user"] = True
                         
-                        return jsonify({"success": True, "redirect": "/dasboard"})
+                        return jsonify({"success": True, "redirect": "/dashboard"})
                     else:
                         return jsonify({"success": False, "error": "Failed to get user info"})
                 else:
@@ -187,11 +187,11 @@ def contact():
 
 
 
-@app.route("/dasboard")
+@app.route("/dashboard")
 @login_required
-def dasboard():
+def dashboard():
     posts=post_db.find()
-    return render_template("dasboard.html",params=params,posts=posts)
+    return render_template("dashboard.html",params=params,posts=posts)
 
 
 
