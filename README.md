@@ -1,6 +1,6 @@
 # Flask Blog Web Application with Firebase Authentication
 
-A modern blog web application built with Flask and MongoDB, featuring Firebase authentication and secure environment variable management.
+A modern blog web application built with Flask and MongoDB, featuring Firebase authentication, secure environment variable management, and background job scheduling.
 
 ## 🔐 Security Features
 
@@ -15,7 +15,7 @@ This application implements proper security practices:
 ### 1. Clone the Repository
 
 ```bash
-git clone <your-repo-url>
+git clone https://github.com/alpha-Gautam/Python-Flask-base-webapp-with-mongoDB.git
 cd Python-Flask-base-webapp-with-mongoDB
 ```
 
@@ -95,7 +95,10 @@ Edit `confi.json` with your personal links:
 2. Enable Authentication and choose your sign-in methods
 3. Enable Firestore Database
 4. Get your configuration from Project Settings
-5. Update the `.env` file with your Firebase credentials
+5. Download the service account key and save as `serviceAccountKey.json`
+6. Update the `.env` file with your Firebase credentials
+
+For detailed Firebase setup instructions, see [FIREBASE_SETUP.md](FIREBASE_SETUP.md).
 
 ### 8. MongoDB Setup
 
@@ -112,7 +115,30 @@ python app.py
 
 The application will be available at `http://localhost:5000`
 
-## 🛡️ Security Checklist
+## 🧪 Testing
+
+Run the Firebase authentication tests:
+
+```bash
+python test_firebase.py
+```
+
+## � Deployment
+
+### Vercel Deployment
+
+1. Install Vercel CLI: `npm install -g vercel`
+2. Deploy: `vercel`
+3. Follow the prompts to configure your deployment
+
+The `vercel.json` file is already configured for Python deployment.
+
+### Other Deployment Options
+
+- **WSGI Server**: Use `wsgi.py` for production deployment with gunicorn
+- **Docker**: Containerize the application for cloud deployment
+
+## �🛡️ Security Checklist
 
 Before deploying or sharing your code, ensure:
 
@@ -129,10 +155,15 @@ Before deploying or sharing your code, ensure:
 
 ```
 ├── app.py                  # Main Flask application
+├── index.py                # Vercel deployment entry point
+├── wsgi.py                 # WSGI server entry point
 ├── firebase_config.py      # Firebase authentication helper
+├── test_firebase.py        # Firebase authentication tests
 ├── requirements.txt        # Python dependencies
 ├── .env.example           # Environment variables template
 ├── confi.json.example     # Configuration template
+├── vercel.json            # Vercel deployment configuration
+├── FIREBASE_SETUP.md      # Detailed Firebase setup guide
 ├── .gitignore            # Git ignore rules
 ├── static/               # Static assets (CSS, JS, images)
 ├── templates/            # HTML templates
@@ -156,6 +187,16 @@ Before deploying or sharing your code, ensure:
 | `FIREBASE_APP_ID`              | Firebase app ID               | Yes      |
 | `FIREBASE_MEASUREMENT_ID`      | Firebase measurement ID       | Optional |
 
+## ⚙️ Features
+
+- **User Authentication**: Firebase-based authentication with Google and email/password
+- **Blog Management**: Create, read, update, and delete blog posts
+- **Contact Form**: Contact form with MongoDB storage
+- **Admin Panel**: Protected admin routes for content management
+- **Background Jobs**: Automated tasks using APScheduler
+- **Responsive Design**: Modern UI with custom CSS and JavaScript
+- **Session Management**: Secure user sessions with Flask
+
 ## ⚠️ Important Notes
 
 1. **Never commit `.env` file** to version control
@@ -163,6 +204,7 @@ Before deploying or sharing your code, ensure:
 3. **Regularly rotate your secret keys** and API keys
 4. **Use HTTPS in production** environments
 5. **Keep Firebase rules secure** and properly configured
+6. **Background scheduler** runs automated health checks every 2 minutes
 
 ## 📝 License
 
