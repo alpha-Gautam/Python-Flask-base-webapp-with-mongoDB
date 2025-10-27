@@ -8,10 +8,10 @@ from dotenv import load_dotenv
 from firebase_config import verify_firebase_token, get_user_info
 from functools import wraps
 from apscheduler.schedulers.background import BackgroundScheduler
+import random
 
 
 scheduler = BackgroundScheduler()
-
 
 def myfunc():
     print("\n\nscheduler is running..........................................")
@@ -20,11 +20,13 @@ def myfunc():
     
     response=requests.get("https://recpapers-backend.onrender.com/")
     print("recpapers response:-",response.text)
+    
+    # Generate new random interval and reschedule the job
+    new_interval = random.randint(5, 300)
+    job.reschedule(trigger='interval', seconds=new_interval)
+    print(f"Next run scheduled in {new_interval} seconds")
 
-
-    return "ok"
-
-job = scheduler.add_job(myfunc, 'interval', minutes=2)
+job = scheduler.add_job(myfunc, 'interval', seconds=5)
 scheduler.start()
 
 # Load environment variables from .env file
