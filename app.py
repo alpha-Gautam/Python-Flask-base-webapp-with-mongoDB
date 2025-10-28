@@ -22,11 +22,11 @@ def myfunc():
     print("recpapers response:-",response.text)
     
     # Generate new random interval and reschedule the job
-    new_interval = random.randint(5, 300)
+    new_interval = random.randint(120, 300)
     job.reschedule(trigger='interval', seconds=new_interval)
     print(f"Next run scheduled in {new_interval} seconds")
 
-job = scheduler.add_job(myfunc, 'interval', seconds=5)
+job = scheduler.add_job(myfunc, 'interval', seconds=120, id='my_job')
 scheduler.start()
 
 # Load environment variables from .env file
